@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Book Store</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5; /* Light background */
+    }
+
+    header {
+      background-color: #0d47a1; /* Dark Blue header */
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 3em; /* Larger header font size */
+    }
+
+    header img {
+      width: 120px; /* Slightly larger logo */
+      display: block;
+      margin: 0 auto;
+    }
+
+    nav {
+      background-color: #1976d2; /* Lighter blue */
+      display: flex;
+      justify-content: center;
+      padding: 20px 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.5em; /* Larger font size for links */
+      margin: 0 20px;
+      padding: 15px 25px;
+    }
+
+    nav a:hover {
+      background-color: #1565c0; /* Darker blue on hover */
+      border-radius: 5px;
+    }
+
+    #container {
+      display: flex;
+      min-height: 100vh;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    #content {
+      width: 85%; /* Increase width to 85% for more space */
+      max-width: 1200px; /* Max width for larger screens */
+      padding: 40px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      margin-top: 30px;
+      font-size: 1.25em; /* Increase font size for better readability */
+    }
+
+    iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+    }
+
+    #footer {
+      background-color: #0d47a1; /* Same as header */
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      font-size: 1.2em; /* Larger footer text */
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.5em; /* Smaller font for mobile screens */
+      }
+
+      nav {
+        flex-direction: column;
+        padding: 15px 0;
+      }
+
+      nav a {
+        margin: 10px 0;
+        padding: 12px 20px;
+        font-size: 1.3em; /* Larger mobile-friendly font */
+      }
+
+      #content {
+        width: 85%;
+        padding: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="D:\23eg110d38\au2.jfif" alt="Book Store Logo"> <!-- Your logo image -->
+    Online Book Store
+  </header>
+
+  <nav>
+    <a href="javascript:void(0);" onclick="loadPage('home')">Home</a>
+    <a href="javascript:void(0);" onclick="loadPage('login')">Login</a>
+    <a href="javascript:void(0);" onclick="loadPage('registration')">Registration</a>
+    <a href="javascript:void(0);" onclick="loadPage('catalogue')">Catalogue</a>
+    <a href="javascript:void(0);" onclick="loadPage('cart')">Cart</a>
+  </nav>
+
+  <div id="container">
+    <div id="content">
+      <iframe src="D:\23eg110d38\book.jpg" name="showframe" id="iframe-content"></iframe>
+    </div>
+  </div>
+
+  <div id="footer">
+    &copy; 2025 Online Book Store. All rights reserved.
+  </div>
+
+  <script>
+    function loadPage(page) {
+      let src;
+      switch (page) {
+        case 'home1':
+          src ='home1.html';
+          break;
+        case 'login':
+          src = 'login.html';
+          break;
+        case 'registration':
+          src = 'registration.html';
+          break;
+        case 'catalogue':
+          src = 'catalogue.html';
+          break;
+        case 'cart':
+          src = 'cart.html';
+          break;
+        default:
+          src = 'home.html';
+      }
+      document.getElementById('iframe-content').src = src;
+    }
+  </script>
+
+</body>
+</html>

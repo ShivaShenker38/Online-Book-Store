@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Interactive Login Page</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f0f4f8;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+  .login-container {
+    background: white;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    width: 300px;
+  }
+  h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+  }
+  label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #555;
+  }
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 6px;
+    border: 1.5px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1rem;
+  }
+  input[type="text"]:focus,
+  input[type="password"]:focus {
+    border-color: #007BFF;
+    outline: none;
+  }
+  .error {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    display: none;
+  }
+  button {
+    margin-top: 25px;
+    width: 100%;
+    background-color: #007BFF;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background-color: #0056b3;
+  }
+  .success-message {
+    color: green;
+    text-align: center;
+    margin-top: 15px;
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="login-container">
+  <h2>Login</h2>
+  <form id="loginForm" onsubmit="return validateForm()">
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" placeholder="Enter username" />
+    <div id="userError" class="error">Username is required.</div>
+    
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" placeholder="Enter password" />
+    <div id="passError" class="error">Password is required.</div>
+    
+    <button type="submit">Login</button>
+  </form>
+  <div id="successMsg" class="success-message">Login successful!</div>
+</div>
+
+<script>
+  function validateForm() {
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
+    let valid = true;
+
+    document.getElementById('userError').style.display = 'none';
+    document.getElementById('passError').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'none';
+
+    if (username === '') {
+      document.getElementById('userError').style.display = 'block';
+      valid = false;
+    }
+    if (password === '') {
+      document.getElementById('passError').style.display = 'block';
+      valid = false;
+    }
+
+    if (valid) {
+      document.getElementById('successMsg').style.display = 'block';
+      // Here you can add code to submit the form data to a server
+    }
+
+    return false; // Prevent actual form submission for demo
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Detailed Registration Form</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #eef2f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+  }
+  .form-container {
+    background: white;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    width: 400px;
+  }
+  h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+  }
+  label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #555;
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="tel"],
+  input[type="date"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 6px;
+    border: 1.5px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    resize: vertical;
+  }
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus,
+  input[type="tel"]:focus,
+  input[type="date"]:focus,
+  select:focus,
+  textarea:focus {
+    border-color: #007BFF;
+    outline: none;
+  }
+  .error {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    display: none;
+  }
+  button {
+    margin-top: 25px;
+    width: 100%;
+    background-color: #007BFF;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background-color: #0056b3;
+  }
+  .success-message {
+    color: green;
+    text-align: center;
+    margin-top: 15px;
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="form-container">
+  <h2>Register</h2>
+  <form id="regForm" onsubmit="return validateForm()">
+    <label for="fullname">Full Name *</label>
+    <input type="text" id="fullname" name="fullname" placeholder="Your full name" />
+    <div id="nameError" class="error">Full name is required.</div>
+
+    <label for="dob">Date of Birth *</label>
+    <input type="date" id="dob" name="dob" max="" />
+    <div id="dobError" class="error">Please enter a valid date of birth.</div>
+
+    <label for="email">Email Address *</label>
+    <input type="email" id="email" name="email" placeholder="example@mail.com" />
+    <div id="emailError" class="error">Valid email is required.</div>
+
+    <label for="phone">Phone Number *</label>
+    <input type="tel" id="phone" name="phone" placeholder="+91" />
+    <div id="phoneError" class="error">Valid phone number is required.</div>
+
+    <label for="gender">Gender *</label>
+    <select id="gender" name="gender">
+      <option value="" disabled selected>Select gender</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      <option value="other">Other</option>
+    </select>
+    <div id="genderError" class="error">Please select your gender.</div>
+
+    <label for="password">Password *</label>
+    <input type="password" id="password" name="password" placeholder="Enter password" />
+    <div id="passError" class="error">Password must be at least 6 characters.</div>
+
+    <label for="confirmPassword">Confirm Password *</label>
+    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" />
+    <div id="confirmError" class="error">Passwords do not match.</div>
+
+    <label for="address">Address *</label>
+    <textarea id="address" name="address" rows="3" placeholder="Your full address"></textarea>
+    <div id="addressError" class="error">Address is required.</div>
+
+    <button type="submit">Register</button>
+  </form>
+  <div id="successMsg" class="success-message">Registration successful!</div>
+</div>
+
+<script>
+  // Set max date for DOB to today
+  document.getElementById('dob').max = new Date().toISOString().split("T")[0];
+
+  function validateForm() {
+    const fullname = document.getElementById('fullname').value.trim();
+    const dob = document.getElementById('dob').value;
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const gender = document.getElementById('gender').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    const address = document.getElementById('address').value.trim();
+
+    let valid = true;
+
+    // Hide all errors initially
+    const errorIds = ['nameError', 'dobError', 'emailError', 'phoneError', 'genderError', 'passError', 'confirmError', 'addressError'];
+    errorIds.forEach(id => document.getElementById(id).style.display = 'none');
+    document.getElementById('successMsg').style.display = 'none';
+
+    if (fullname === '') {
+      document.getElementById('nameError').style.display = 'block';
+      valid = false;
+    }
+    if (dob === '') {
+      document.getElementById('dobError').style.display = 'block';
+      valid = false;
+    }
+    if (!validateEmail(email)) {
+      document.getElementById('emailError').style.display = 'block';
+      valid = false;
+    }
+    if (!validatePhone(phone)) {
+      document.getElementById('phoneError').style.display = 'block';
+      valid = false;
+    }
+    if (gender === '') {
+      document.getElementById('genderError').style.display = 'block';
+      valid = false;
+    }
+    if (password.length < 6) {
+      document.getElementById('passError').style.display = 'block';
+      valid = false;
+    }
+    if (password !== confirmPassword) {
+      document.getElementById('confirmError').style.display = 'block';
+      valid = false;
+    }
+    if (address === '') {
+      document.getElementById('addressError').style.display = 'block';
+      valid = false;
+    }
+
+    if (valid) {
+      document.getElementById('successMsg').style.display = 'block';
+      // Here you can add code to send form data to a server
+    }
+
+    return false; // prevent actual form submission for demo
+  }
+
+  function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  }
+
+  function validatePhone(phone) {
+    // Very simple phone validation (digits, +, spaces, -, min length 7)
+    const re = /^[+0-9\s\-]{7,}$/;
+    return re.test(phone);
+  }
+</script>
+
+</body>
+</html>
